@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ms">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pengumuman | SKAWAD</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="app">
+
+    <header class="header">
+        <h1>📢 Pengumuman</h1>
+        <p>SK Kampung Jawa 2</p>
+    </header>
+
+    <main class="content">
+
+        <a href="index.html">← Kembali ke Utama</a>
+
+        <br><br>
+
+        <div class="welcome">
+            <h2>Pengumuman Terkini</h2>
+            <p>Maklumat dan pengumuman rasmi sekolah.</p>
+        </div>
+
+        <div id="announcementList"></div>
+
+    </main>
+
+</div>
+
+<script src="data.js"></script>
+
+<script>
+
+const list = document.getElementById("announcementList");
+
+// Announcements from data.js
+const defaultAnnouncements = schoolData.announcements;
+
+// Announcements saved through Admin
+const savedAnnouncements = JSON.parse(
+    localStorage.getItem("skawadAnnouncements")
+) || [];
+
+// Combine both lists
+const allAnnouncements = [
+    ...savedAnnouncements,
+    ...defaultAnnouncements
+];
+
+// Display announcements
+allAnnouncements.forEach(function(item) {
+
+    const announcement = document.createElement("div");
+
+    announcement.className = "announcement";
+
+    const title = document.createElement("h3");
+    title.textContent = item.title;
+
+    const date = document.createElement("small");
+    date.textContent = "📅 " + item.date + " • " + item.category;
+
+    const message = document.createElement("p");
+    message.textContent = item.message;
+
+    announcement.appendChild(title);
+    announcement.appendChild(date);
+    announcement.appendChild(message);
+
+    list.appendChild(announcement);
+
+});
+
+</script>
+
+</body>
+</html>

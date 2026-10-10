@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ms">
+
+<head>
+    
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#073b78">
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SKAWAD AI</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="app">
+
+    <header class="header">
+        <h1>SKAWAD AI</h1>
+        <p>SK Kampung Jawa 2</p>
+    </header>
+
+    <main class="content">
+
+        <section class="welcome">
+            <h2>Selamat Datang 👋</h2>
+            <p>
+                Pusat informasi pintar SKAWAD.
+                Dapatkan maklumat sekolah dengan mudah dan pantas.
+            </p>
+        </section>
+
+        <div class="menu">
+
+<button onclick="window.location.href='pengumuman.html'">
+    <span class="icon">📢</span>
+    Pengumuman
+</button>
+
+            <button>
+                <span class="icon">📅</span>
+                Takwim Sekolah
+            </button>
+
+            <button>
+                <span class="icon">📚</span>
+                Akademik
+            </button>
+
+            <button>
+                <span class="icon">🏆</span>
+                Kokurikulum
+            </button>
+
+            <button>
+                <span class="icon">🏫</span>
+                Info Sekolah
+            </button>
+
+            <button>
+                <span class="icon">☎️</span>
+                Hubungi
+            </button>
+
+            <<button class="ai-button" onclick="window.location.href='chat.html'">
+    <span class="icon">🤖</span>
+    Tanya SKAWAD AI
+</button>
+
+        </div>
+
+    </main>
+
+    <footer class="footer">
+        SK Kampung Jawa 2
+    </footer>
+
+</div>
+
+<script>
+    if ("serviceWorker" in navigator) {
+        window.addEventListener("load", function () {
+            navigator.serviceWorker.register("./sw.js")
+                .then(function () {
+                    console.log("SKAWAD AI Service Worker registered!");
+                })
+                .catch(function (error) {
+                    console.error("Service Worker error:", error);
+                });
+        });
+    }
+</script>
+
+</body>
+</html>

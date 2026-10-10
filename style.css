@@ -1,0 +1,206 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f3f6fb;
+    color: #172033;
+}
+
+.app {
+    max-width: 480px;
+    min-height: 100vh;
+    margin: auto;
+    background: white;
+}
+
+.header {
+    background: #073b78;
+    color: white;
+    padding: 45px 25px 35px;
+    border-radius: 0 0 30px 30px;
+}
+
+.header h1 {
+    font-size: 32px;
+    margin-bottom: 5px;
+}
+
+.header p {
+    opacity: 0.85;
+}
+
+.content {
+    padding: 25px 20px;
+}
+
+.welcome {
+    margin-bottom: 25px;
+}
+
+.welcome h2 {
+    font-size: 22px;
+    margin-bottom: 7px;
+}
+
+.welcome p {
+    color: #667085;
+    line-height: 1.5;
+}
+
+.menu {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+}
+
+.menu button {
+    border: none;
+    background: #f7f9fc;
+    border-radius: 18px;
+    padding: 25px 10px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+}
+
+.menu button:hover {
+    transform: translateY(-2px);
+}
+
+.icon {
+    display: block;
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+.ai-button {
+    grid-column: 1 / -1;
+    background: #073b78 !important;
+    color: white;
+}
+
+.footer {
+    text-align: center;
+    color: #98a2b3;
+    font-size: 12px;
+    padding: 30px 15px;
+}form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+form label {
+    font-weight: bold;
+    margin-top: 8px;
+}
+
+form input,
+form select,
+form textarea {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #d0d5dd;
+    border-radius: 12px;
+    font-size: 15px;
+    font-family: inherit;
+}
+
+form textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.admin-submit {
+    margin-top: 15px;
+    padding: 16px;
+    border: none;
+    border-radius: 12px;
+    background: #073b78;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+/* SKAWAD AI Chatbot */
+
+.chat-messages {
+    height: 350px;
+    overflow-y: auto;
+    background: #f5f7fb;
+    border-radius: 18px;
+    padding: 18px;
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.bot-message {
+    background: #e6eefb;
+    color: #172033;
+    padding: 14px;
+    border-radius: 15px 15px 15px 4px;
+    max-width: 85%;
+    line-height: 1.5;
+    align-self: flex-start;
+}
+
+.user-message {
+    background: #073b78;
+    color: white;
+    padding: 14px;
+    border-radius: 15px 15px 4px 15px;
+    max-width: 85%;
+    line-height: 1.5;
+    align-self: flex-end;
+}
+
+.chat-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.chat-form input {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #d0d5dd;
+    border-radius: 12px;
+    font-size: 15px;
+}
+
+.chat-form button {
+    margin-top: 0;
+}
+/* Suggested Questions */
+
+.suggested-questions {
+    margin-bottom: 18px;
+}
+
+.suggested-questions p {
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.suggested-questions button {
+    background: #eaf1fb;
+    color: #073b78;
+    border: 1px solid #d5e3f5;
+    border-radius: 20px;
+    padding: 10px 14px;
+    margin: 4px 4px 4px 0;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.suggested-questions button:hover {
+    background: #d5e5fa;
+}
+

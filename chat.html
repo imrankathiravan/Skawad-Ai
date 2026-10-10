@@ -1,0 +1,214 @@
+
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tanya SKAWAD AI</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="app">
+
+    <header class="header">
+        <h1>🤖 SKAWAD AI</h1>
+        <p>Pembantu Informasi Pintar Sekolah</p>
+    </header>
+
+    <main class="content">
+
+        <a href="index.html">← Kembali ke Utama</a>
+
+        <div class="welcome" style="margin-top:25px;">
+            <h2>Tanya SKAWAD AI 💬</h2>
+            <p>
+                Hai! Saya pembantu maya SKAWAD.
+                Ada apa-apa soalan tentang sekolah?
+            </p>
+        </div>
+
+        <div id="chatMessages" class="chat-messages">
+
+            <div class="bot-message">
+                👋 Assalamualaikum dan salam sejahtera!
+                Saya SKAWAD AI. Apa yang boleh saya bantu?
+            </div>
+
+        </div>
+
+<div class="suggested-questions">
+    <p><strong>💡 Soalan Cadangan</strong></p>
+
+    <button type="button" onclick="askSuggestion('Ada pengumuman terkini?')">
+        📢 Pengumuman Terkini
+    </button>
+
+    <button type="button" onclick="askSuggestion('Bila perkhemahan?')">
+        🏕️ Perkhemahan
+    </button>
+
+    <button type="button" onclick="askSuggestion('Apa nama sekolah?')">
+        🏫 Info Sekolah
+    </button>
+</div>
+
+
+
+        <form id="chatForm" class="chat-form">
+
+            <input
+                type="text"
+                id="userInput"
+                placeholder="Taip soalan anda..."
+                autocomplete="off"
+                required
+            >
+
+            <button type="submit" class="admin-submit">
+                ➤ Hantar
+            </button>
+
+        </form>
+
+    </main>
+
+</div>
+
+<script src="data.js"></script>
+
+<script>
+const chatForm = document.getElementById("chatForm");
+const userInput = document.getElementById("userInput");
+const chatMessages = document.getElementById("chatMessages");
+
+function addMessage(message, sender) {
+    const bubble = document.createElement("div");
+
+    bubble.className = sender === "user"
+        ? "user-message"
+        : "bot-message";
+
+    bubble.textContent = message;
+    chatMessages.appendChild(bubble);
+
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+function getAnswer(question) {
+    const query = question
+    .toLowerCase()
+    .replace(/[^\p{L}\p{N}\s]/gu, "")
+    .trim();
+
+    // Read announcements saved through Admin
+    let savedAnnouncements = [];
+
+    try {
+        savedAnnouncements = JSON.parse(
+            localStorage.getItem("skawadAnnouncements")
+        ) || [];
+    } catch (error) {
+        savedAnnouncements = [];
+    }
+
+    const announcements = [
+        ...savedAnnouncements,
+        ...schoolData.announcements
+    ];
+
+    // School identity
+    if (
+        query.includes("nama sekolah") ||
+        query.includes("skawad itu apa")
+    ) {
+        return "Nama sekolah ialah " +
+            schoolData.schoolName + ".";
+    }
+
+    // List announcements
+    if (
+        query.includes("pengumuman") ||
+        query.includes("aktiviti terkini")
+    ) {
+        return announcements.map(item =>
+            item.title + " (" + item.date + ")"
+        ).join("\n");
+    }
+
+    // Search announcements using keywords
+    const synonyms = {
+    camping: "perkhemahan",
+    camp: "perkhemahan",
+    kem: "perkhemahan",
+    mesyuarat: "mesyuarat",
+    meeting: "mesyuarat",
+    pibg: "pibg",
+    announcement: "pengumuman",
+    notice: "pengumuman",
+    sports: "sukan",
+    sport: "sukan",
+    exam: "peperiksaan",
+    examination: "peperiksaan"
+};
+
+const words = query
+    .split(/\s+/)
+    .filter(word => word.length >= 3)
+    .map(word => synonyms[word] || word);
+
+    const matches = announcements.map(item => {
+        const title = item.title.toLowerCase();
+        const content = (
+            item.title + " " +
+            item.category + " " +
+            item.message
+        ).toLowerCase();
+
+        const score = words.reduce((total, word) => {
+            return total +
+                (title.includes(word) ? 3 : 0) +
+                (content.includes(word) ? 1 : 0);
+        }, 0);
+
+        return { item, score };
+    }).filter(result => result.score > 0);
+
+    matches.sort((a, b) => b.score - a.score);
+
+    if (matches.length > 0) {
+        const result = matches[0].item;
+
+        return "📢 " + result.title +
+            "\n📅 " + result.date +
+            "\n\n" + result.message;
+    }
+
+    return "Maaf, saya belum mempunyai maklumat " +
+        "tentang perkara tersebut. Sila rujuk " +
+        "pihak sekolah untuk pengesahan.";
+}
+
+chatForm.addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    const question = userInput.value.trim();
+
+    if (!question) return;
+
+    addMessage(question, "user");
+    userInput.value = "";
+
+      const answer = getAnswer(question);
+    addMessage(answer, "bot");
+});
+
+function askSuggestion(question) {
+    userInput.value = question;
+    chatForm.requestSubmit();
+}
+
+</script>
+</body>
+</html>
