@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="ms">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#073b78">
+    <link rel="manifest" href="manifest.json">
+    <title>Kehadiran Demo | SKAWAD AI</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="attendance.css">
+</head>
+<body>
+<div class="app attendance-app">
+    <header class="header"><h1>📋 KEHADIRAN</h1><p>SKAWAD AI · Demonstrasi</p></header>
+    <main class="content">
+        <a href="index.html">← Kembali ke Utama</a>
+        <aside class="demo-notice" aria-label="Notis demonstrasi">
+            <strong>DEMO MODE — FICTIONAL DATA</strong>
+            <p>Semua murid dan kelas adalah rekaan. Jangan masukkan maklumat murid sebenar. Rekod demo disimpan dalam pelayar ini sahaja, bukan dihantar ke sekolah atau dikongsi dengan guru lain.</p>
+        </aside>
+        <h2>Rekod Kehadiran Demo</h2>
+        <div class="attendance-filters">
+            <label for="attendanceYear">Tahun<select id="attendanceYear"></select></label>
+            <label for="attendanceClass">Kelas demo<select id="attendanceClass"></select></label>
+            <label for="attendanceDate">Tarikh<input id="attendanceDate" type="date" required></label>
+        </div>
+        <section aria-labelledby="dashboardTitle">
+            <h2 id="dashboardTitle">Ringkasan Kehadiran</h2>
+            <div class="attendance-stats">
+                <div><span>Jumlah murid</span><strong id="statTotal">0</strong></div>
+                <div class="stat-present"><span>Hadir</span><strong id="statPresent">0</strong></div>
+                <div class="stat-absent"><span>Tidak Hadir</span><strong id="statAbsent">0</strong></div>
+                <div class="stat-late"><span>Lewat</span><strong id="statLate">0</strong></div>
+                <div class="stat-excused"><span>Bersebab</span><strong id="statExcused">0</strong></div>
+                <div><span>Belum ditanda</span><strong id="statUnmarked">0</strong></div>
+            </div>
+            <div class="attendance-percentage"><label for="attendanceProgress">Kehadiran: <strong id="statPercentage">0%</strong></label><progress id="attendanceProgress" max="100" value="0">0%</progress></div>
+            <p class="attendance-help">Peratus = (Hadir + Lewat) ÷ jumlah murid × 100. Bersebab tidak dikira hadir. Ringkasan berubah semasa anda menanda, termasuk perubahan yang belum disimpan.</p>
+        </section>
+        <section aria-labelledby="rosterTitle">
+            <h2 id="rosterTitle">Senarai Murid Rekaan</h2>
+            <p id="attendanceState" role="status" aria-live="polite">Memuatkan rekod demo…</p>
+            <form id="attendanceForm">
+                <div id="attendanceRoster" class="attendance-roster"></div>
+                <button id="saveAttendance" class="admin-submit" type="submit" disabled>Simpan Kehadiran Demo</button>
+            </form>
+            <button id="deleteAttendance" class="attendance-delete" type="button" disabled>Padam rekod demo bagi pilihan ini</button>
+            <p class="attendance-help">Untuk mengedit, pilih tahun, kelas dan tarikh rekod yang sama. Tukar status, kemudian simpan semula. Pemadaman hanya melibatkan rekod demo bagi pilihan tersebut.</p>
+        </section>
+        <noscript>Aktifkan JavaScript untuk mencuba modul kehadiran demo.</noscript>
+    </main>
+</div>
+<script src="attendance.js"></script>
+<script>
+if ('serviceWorker' in navigator) navigator.serviceWorker.register('./sw.js').catch(() => {});
+</script>
+</body></html>

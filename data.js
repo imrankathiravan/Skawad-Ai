@@ -14,6 +14,7 @@ const schoolData = {
 
         {
             title: "Perkhemahan Perdana Unit Beruniform",
+            eventId: "perkhemahan-perdana-2026",
             date: "23 - 24 Oktober 2026",
             category: "Kokurikulum",
             message: "Perkhemahan Perdana Unit Beruniform akan diadakan pada 23 hingga 24 Oktober 2026."
@@ -21,6 +22,7 @@ const schoolData = {
 
         {
             title: "Perkhemahan Perdana SKAWAD",
+            eventId: "perkhemahan-perdana-2026",
             date: "23 - 24 Oktober 2026",
             category: "Aktiviti Sekolah",
             message: "Murid yang terlibat diminta membuat persediaan untuk Perkhemahan Perdana."

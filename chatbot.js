@@ -1,5 +1,5 @@
 /* Deterministic, offline assistant. Conversation state lives only in this page. */
-function createSchoolAssistant() {
+function createSchoolAssistant({ now = () => new Date() } = {}) {
     let context = null;
     let language = "ms";
     const normalize = value => String(value).normalize("NFKC").toLowerCase()
@@ -7,16 +7,38 @@ function createSchoolAssistant() {
     const has = (query, phrases) => phrases.some(phrase => (" " + query + " ").includes(" " + phrase + " "));
     const choose = (ms, en, ta) => language === "en" ? en : language === "ta" ? (ta || ms) : ms;
     const unavailable = () => choose(
-        "Maaf, maklumat ini belum tersedia dalam sumber awam projek. Sila rujuk pihak sekolah untuk pengesahan.",
-        "Sorry, this information is not available in the project's public sources. Please check with the school.",
+        "Maaf, maklumat ini belum tersedia. Sila tanya pihak sekolah untuk kepastian.",
+        "Sorry, this information is not available yet. Please check with the school.",
         "மன்னிக்கவும், இந்தத் தகவல் தற்போது கிடைக்கவில்லை. பள்ளியைத் தொடர்பு கொள்ளவும்.");
-    const format = item => item.title + "\n" + item.date + "\n" + item.message;
+    const today = () => {
+        const parts = new Intl.DateTimeFormat("en-GB", { timeZone: "Asia/Kuala_Lumpur", year: "numeric", month: "2-digit", day: "2-digit" }).formatToParts(now());
+        const value = type => parts.find(part => part.type === type).value;
+        return `${value("year")}-${value("month")}-${value("day")}`;
+    };
+    const confirmation = () => choose("Maklumat ini belum disahkan oleh pihak sekolah. Sila semak dengan pihak sekolah untuk kepastian.", "This information has not been confirmed by the school. Please check with the school.", "இந்தத் தகவல் பள்ளியால் உறுதிப்படுத்தப்படவில்லை. பள்ளியிடம் கேட்டறியவும்.");
+    const format = item => {
+        if (!item.isEvent) return choose("Pengumuman pada ", "Announcement dated ", "அறிவிப்பு தேதி ") + item.date + ":\n" + item.title + "\n" + item.message;
+        let timing = choose("Tarikh aktiviti ini belum dapat dipastikan.", "The event dates are unclear.", "நிகழ்வின் தேதிகள் தெளிவாக இல்லை.");
+        if (item.dates) {
+            const day = today();
+            timing = day > item.dates.end
+                ? choose("Tarikh ini sudah berlalu. Pelaksanaan aktiviti ini belum disahkan.", "These dates have passed. We cannot confirm whether the event took place.", "இந்தத் தேதிகள் கடந்துவிட்டன. நிகழ்வு நடந்ததா என்பது உறுதிப்படுத்தப்படவில்லை.")
+                : day < item.dates.start
+                    ? choose("Tarikh ini akan datang. Sila semak dengan pihak sekolah sama ada rancangan ini masih diteruskan.", "These dates are upcoming. Please check with the school whether the plan is still going ahead.", "இந்தத் தேதிகள் இனி வரவுள்ளன. திட்டத்தைப் பள்ளியிடம் உறுதிசெய்யவும்.")
+                    : choose("Hari ini dalam tempoh yang dijadualkan. Sila semak dengan pihak sekolah sama ada aktiviti ini berlangsung.", "Today is within the scheduled dates. Please check with the school whether the event is taking place.", "இன்று திட்டமிட்ட தேதிகளுக்குள் உள்ளது. நிகழ்வைப் பள்ளியிடம் உறுதிசெய்யவும்.");
+        }
+        return item.title + choose(" dijadualkan pada ", " was scheduled for ", " திட்டமிட்ட தேதி: ") + item.date + ".\n" + timing;
+    };
+    const announcements = items => {
+        const groups = schoolAnnouncementGroups(items);
+        return groups.length ? groups.map(format).join("\n\n") + "\n\n" + confirmation() : unavailable();
+    };
     function answer(question) {
         const q = normalize(question);
         if (!q) return unavailable();
         if (/\p{Script=Tamil}/u.test(q)) language = "ta";
         else if (has(q, ["what", "when", "where", "how", "school name", "school calendar", "announcements", "announcement", "notice", "camping", "camp", "calendar", "academics", "homework", "year", "thanks", "hello", "english", "mathematics", "student", "pupil"])) language = "en";
-        else if (has(q, ["apa", "bila", "mana", "siapa", "tahun", "pengumuman", "terima kasih", "bahasa melayu"])) language = "ms";
+        else if (has(q, ["apa", "bila", "mana", "siapa", "tahun", "pengumuman", "perkhemahan", "kokurikulum", "akademik", "takwim", "pdpr", "terima kasih", "bahasa melayu"])) language = "ms";
         // Never search for or echo personal records, even when a school topic is mentioned.
         if (has(q, ["murid", "pupil", "student", "மாணவர்"]) && has(q, ["alamat", "address", "telefon", "phone", "ic", "markah", "marks", "rekod", "records", "senarai", "list"])) {
             context = null; return unavailable();
@@ -45,21 +67,21 @@ function createSchoolAssistant() {
         if (topic === "pdpr") return unavailable();
         if (topic === "camp" || topic === "cocurricular") {
             if (has(q, ["where", "mana", "pukul", "time", "who", "siapa", "how", "bagaimana", "yuran", "fee", "bawa", "bring"])) return unavailable();
-            return choose("Rekod pengumuman projek (bukan pengesahan aktiviti akan datang):\n", "Project announcement record (not confirmation of an upcoming event):\n", "பதிவிலுள்ள அறிவிப்பு:\n") + schoolKnowledge.cocurricular.announcements.map(format).join("\n\n") + "\nSumber: data.js";
+            return announcements(schoolKnowledge.cocurricular.announcements);
         }
-        if (topic === "calendar") return choose("Takwim penuh belum tersedia. Tarikh yang direkodkan dalam pengumuman:\n", "The full calendar is unavailable. Dates recorded in announcements:\n", "பதிவிலுள்ள தேதிகள்:\n") + schoolKnowledge.announcements.items.map(item => item.title + ": " + item.date).join("\n") + "\nSumber: data.js";
+        if (topic === "calendar") return choose("Takwim penuh belum tersedia. Ini maklumat tarikh yang saya ada:\n", "The full calendar is unavailable. Here are the dates I have:\n", "முழு நாட்காட்டி கிடைக்கவில்லை. கிடைக்கும் தேதிகள்:\n") + announcements(schoolKnowledge.announcements.items);
         if (topic === "announcements") {
             if (followup && !has(q, ["more details", "maklumat lanjut", "tell me more"])) return unavailable();
-            return choose("Pengumuman dalam projek; status terkini belum disahkan:\n", "Announcements in the project; current status is unverified:\n", "பதிவிலுள்ள அறிவிப்புகள்:\n") + schoolKnowledge.announcements.items.map(format).join("\n\n") + "\nSumber: data.js";
+            return announcements(schoolKnowledge.announcements.items);
         }
         const match = q.match(/(?:tahun|year|darjah|grade|standard)\s*([1-6])(?!\d)/) || q.match(/^(?:dan |and |what about |bagaimana pula )?([1-6])$/);
         const year = match ? Number(match[1]) : previous && previous.topic === "academic" ? previous.year : null;
         context.year = year;
-        if (year && year !== 2) return choose("Tahun ", "Year ", "ஆண்டு ") + year + choose(" disenaraikan di akademik.html, tetapi halaman dan bahan belum tersedia.", " is listed in akademik.html, but its page and materials are not available.", ": பாடங்கள் தற்போது கிடைக்கவில்லை.");
+        if (year && year !== 2) return choose("Tahun ", "Year ", "ஆண்டு ") + year + choose(": bahan pembelajaran belum tersedia. Anda boleh cuba bahan Bahasa Melayu Tahun 2.", ": learning materials are not available yet. You can try Year 2 Bahasa Melayu instead.", ": பாடங்கள் தற்போது கிடைக்கவில்லை.");
         if (!year) return choose("Portal Akademik menyenaraikan Tahun 1–6. Bahan yang tersedia ialah Bahasa Melayu Tahun 2: Kata Nama Am. Tahun berapa?", "The academic portal lists Years 1–6. Available material: Year 2 Bahasa Melayu, Kata Nama Am. Which year?", "ஆண்டு 1–6 பட்டியலிடப்பட்டுள்ளன. ஆண்டு 2 Bahasa Melayu பாடம் உள்ளது. எந்த ஆண்டு?");
-        if (has(q, ["homework", "kerja rumah"])) return choose("Belum ada tugasan Bahasa Melayu Tahun 2 yang diterbitkan (bm-tahun2.html).", "No Year 2 Bahasa Melayu homework has been published (bm-tahun2.html).", "ஆண்டு 2 Bahasa Melayu வீட்டுப்பாடம் வெளியிடப்படவில்லை.");
+        if (has(q, ["homework", "kerja rumah"])) return choose("Belum ada tugasan Bahasa Melayu Tahun 2 yang diterbitkan. Sila semak dengan guru anda.", "No Year 2 Bahasa Melayu homework has been published. Please check with your teacher.", "ஆண்டு 2 Bahasa Melayu வீட்டுப்பாடம் வெளியிடப்படவில்லை. ஆசிரியரிடம் கேட்டறியவும்.");
         if (has(q, ["matematik", "mathematics", "sains", "science", "english", "tamil", "muzik", "islam", "moral", "seni", "jasmani", "exam", "peperiksaan", "jadual", "schedule", "when", "bila", "tarikh", "date", "where", "mana", "who", "siapa"])) return unavailable();
-        return choose("Bahasa Melayu Tahun 2: ", "Year 2 Bahasa Melayu: ", "ஆண்டு 2 Bahasa Melayu: ") + schoolKnowledge.academic.lesson.topic + ".\n" + schoolKnowledge.academic.lesson.definition + "\nContoh: " + schoolKnowledge.academic.lesson.examples + ".\nSumber: bm-tahun2.html (nota dan latihan).";
+        return choose("Bahasa Melayu Tahun 2: ", "Year 2 Bahasa Melayu: ", "ஆண்டு 2 Bahasa Melayu: ") + schoolKnowledge.academic.lesson.topic + ".\n" + schoolKnowledge.academic.lesson.definition + choose("\nContoh: ", "\nExamples: ", "\nஎடுத்துக்காட்டுகள்: ") + schoolKnowledge.academic.lesson.examples + ".";
     }
     return { answer };
 }

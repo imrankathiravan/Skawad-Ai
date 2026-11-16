@@ -1,5 +1,5 @@
 
-const CACHE_NAME = "skawad-ai-v2";
+const CACHE_NAME = "skawad-ai-v5";
 
 const FILES_TO_CACHE = [
     "./",
@@ -13,6 +13,9 @@ const FILES_TO_CACHE = [
     "./akademik.html",
     "./tahun2.html",
     "./bm-tahun2.html",
+    "./kehadiran.html",
+    "./attendance.js",
+    "./attendance.css",
     "./manifest.json",
     "./icons/icon-192.png",
     "./icons/icon-512.png"
