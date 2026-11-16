@@ -1,0 +1,114 @@
+
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#073b78">
+    <title>Bahasa Melayu Tahun 2 | SKAWAD AI</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <h1>📖 BAHASA MELAYU</h1>
+    <p>Tahun 2 | SK Kampung Jawa 2</p>
+</header>
+
+<main class="container">
+
+    <a href="tahun2.html">← Kembali ke Tahun 2</a>
+
+    <h2>Selamat Datang!</h2>
+    <p>
+        Mari belajar Bahasa Melayu dengan
+        nota dan latihan interaktif.
+    </p>
+
+    <div class="academic-grid">
+        <a href="#nota" class="academic-card">
+            <span>📚</span>
+            <h3>Nota Pembelajaran</h3>
+        </a>
+
+        <a href="#latihan" class="academic-card">
+            <span>✏️</span>
+            <h3>Latihan Interaktif</h3>
+        </a>
+
+        <a href="#kerjarumah" class="academic-card">
+            <span>📝</span>
+            <h3>Kerja Rumah</h3>
+        </a>
+
+        <a href="#kuiz" class="academic-card">
+            <span>🏆</span>
+            <h3>Kuiz Bahasa Melayu</h3>
+        </a>
+    </div>
+
+    <section id="nota">
+        <h2>📚 Nota: Kata Nama Am</h2>
+        <p>
+            Kata nama am ialah perkataan yang
+            digunakan untuk menamakan orang,
+            haiwan, tempat dan benda secara umum.
+        </p>
+        <p>
+            <strong>Contoh:</strong>
+            guru, kucing, sekolah, buku.
+        </p>
+    </section>
+
+    <section id="latihan">
+        <h2>✏️ Latihan Interaktif</h2>
+        <p>Yang manakah kata nama am bagi haiwan?</p>
+
+        <button type="button" onclick="semakJawapan(false)">
+            A. Sekolah
+        </button>
+
+        <button type="button" onclick="semakJawapan(true)">
+            B. Kucing
+        </button>
+
+        <button type="button" onclick="semakJawapan(false)">
+            C. Meja
+        </button>
+
+        <p id="keputusan" aria-live="polite"></p>
+    </section>
+
+    <section id="kerjarumah">
+        <h2>📝 Kerja Rumah</h2>
+        <p>
+            Belum ada tugasan yang diterbitkan.
+        </p>
+    </section>
+
+    <section id="kuiz">
+        <h2>🏆 Kuiz Bahasa Melayu</h2>
+        <p>
+            Lebih banyak soalan kuiz akan
+            ditambah tidak lama lagi.
+        </p>
+    </section>
+
+</main>
+
+<script>
+function semakJawapan(betul) {
+    const keputusan = document.getElementById("keputusan");
+
+    if (betul) {
+        keputusan.textContent = "✅ Tahniah! Jawapan anda betul.";
+        keputusan.style.color = "green";
+    } else {
+        keputusan.textContent = "❌ Cuba lagi. Pilih jawapan yang betul.";
+        keputusan.style.color = "red";
+    }
+}
+</script>
+
+</body>
+</html>

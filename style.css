@@ -142,6 +142,8 @@ form textarea {
 }
 
 .bot-message {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
     background: #e6eefb;
     color: #172033;
     padding: 14px;
@@ -152,6 +154,8 @@ form textarea {
 }
 
 .user-message {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
     background: #073b78;
     color: white;
     padding: 14px;
@@ -202,5 +206,219 @@ form textarea {
 
 .suggested-questions button:hover {
     background: #d5e5fa;
+}
+
+/* ===== SKAWAD AI AKADEMIK ===== */
+
+.academic-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.academic-card {
+    background: linear-gradient(135deg, #073b78, #1265b3);
+    color: white;
+    text-align: center;
+    padding: 25px 10px;
+    border-radius: 16px;
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.academic-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
+}
+
+.academic-card span {
+    display: block;
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+.academic-card h3 {
+    color: white;
+    font-size: 17px;
+    margin: 8px 0;
+}
+
+.academic-card p {
+    color: #e0edff;
+    font-size: 13px;
+    margin: 0;
+}
+
+.academic-note {
+    background: #eaf1fb;
+    color: #073b78;
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 13px;
+    text-align: center;
+    margin-top: 20px;
+}
+
+@media (max-width: 350px) {
+    .academic-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Fix Akademik homepage card */
+.menu-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    min-height: 175px;
+    padding: 20px;
+    background: #f5f7fa;
+    border: none;
+    border-radius: 24px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+    color: #000;
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: none;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.menu-link .icon {
+    font-size: 38px;
+}
+
+/* Fix Akademik page layout */
+.academic-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 15px;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.academic-card {
+    min-width: 0;
+    box-sizing: border-box;
+    overflow-wrap: break-word;
+}
+
+.container {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+@media (max-width: 600px) {
+    .academic-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+
+    .academic-card {
+        padding: 18px 8px;
+    }
+
+    .academic-card h3 {
+        font-size: 14px;
+    }
+}
+
+/* Bahasa Melayu Interactive Exercise */
+
+#latihan {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 16px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+}
+
+#latihan button {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    margin: 10px 0;
+    background: #eaf1fb;
+    color: #073b78;
+    border: 2px solid #d5e3f5;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    text-align: left;
+    cursor: pointer;
+}
+
+#latihan button:hover {
+    background: #d5e5fa;
+}
+
+#keputusan {
+    font-size: 17px;
+    font-weight: bold;
+    margin-top: 15px;
+}
+
+/* SKAWAD AI - Responsive Page Fix */
+
+html {
+    width: 100%;
+    overflow-x: clip;
+}
+
+body {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    overflow-x: clip;
+    box-sizing: border-box;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+.container {
+    width: 100%;
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+}
+
+.academic-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: 100%;
+    max-width: 100%;
+}
+
+.academic-card {
+    min-width: 0;
+    width: 100%;
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding: 15px;
+    }
+
+    .academic-grid {
+        gap: 10px;
+    }
+
+    .academic-card {
+        padding: 18px 8px;
+    }
 }
 

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ms">
 
 <head>
@@ -43,17 +43,8 @@ const list = document.getElementById("announcementList");
 // Announcements from data.js
 const defaultAnnouncements = schoolData.announcements;
 
-// Announcements saved through Admin
-const savedAnnouncements = JSON.parse(
-    localStorage.getItem("skawadAnnouncements")
-) || [];
-
-// Combine both lists
-const allAnnouncements = [
-    ...savedAnnouncements,
-    ...defaultAnnouncements
-];
-
+// Public announcements come only from the versioned project file.
+const allAnnouncements = defaultAnnouncements;
 // Display announcements
 allAnnouncements.forEach(function(item) {
 
@@ -77,6 +68,29 @@ allAnnouncements.forEach(function(item) {
     list.appendChild(announcement);
 
 });
+
+// Preserve local previews, but never present browser storage as shared school data.
+try {
+    const drafts = JSON.parse(localStorage.getItem("skawadAnnouncements") || "[]");
+    if (Array.isArray(drafts) && drafts.length) {
+        const heading = document.createElement("h2");
+        heading.textContent = "Draf tempatan — pelayar ini sahaja (belum diterbitkan)";
+        list.appendChild(heading);
+        drafts.forEach(item => {
+            if (!item || ![item.title, item.date, item.category, item.message].every(value => typeof value === "string")) return;
+            const draft = document.createElement("div");
+            draft.className = "announcement";
+            const title = document.createElement("h3");
+            title.textContent = item.title;
+            const detail = document.createElement("p");
+            detail.textContent = item.date + " • " + item.category + " — " + item.message;
+            draft.append(title, detail);
+            list.appendChild(draft);
+        });
+    }
+} catch (error) {
+    // Corrupt or unavailable browser storage must not hide public announcements.
+}
 
 </script>
 
