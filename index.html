@@ -1,106 +1,165 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ms">
-
 <head>
-    
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#073b78">
-<meta name="apple-mobile-web-app-capable" content="yes">
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <meta name="theme-color" content="#073b78">
+    <meta name="apple-mobile-web-app-capable" content="yes">
     <title>SKAWAD AI</title>
-
+    <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="style.css">
 </head>
+<body class="home">
+    <svg class="home-icon-library" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <symbol id="icon-chevron" viewBox="0 0 24 24">
+            <path d="m9 5 7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round"/>
+        </symbol>
+        <symbol id="icon-location" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M12 2a8 8 0 0 0-8 8c0 6 8 12 8 12s8-6 8-12a8 8 0 0 0-8-8Zm0 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z"/>
+        </symbol>
+        <symbol id="icon-robot" viewBox="0 0 120 116">
+            <path d="M45 78h30c16 0 23 16 24 35H21c1-19 8-35 24-35" fill="#dbeeff" stroke="#85bfff" stroke-width="3"/>
+            <path d="M37 113V97m46 16V97M60 26V13" stroke="#86bfff" stroke-width="5" stroke-linecap="round"/>
+            <circle cx="60" cy="9" r="6" fill="#f5fbff"/>
+            <rect x="12" y="43" width="96" height="29" rx="13" fill="#91c4f6"/>
+            <rect x="21" y="25" width="78" height="59" rx="25" fill="#f8fcff" stroke="#c6e4ff" stroke-width="3"/>
+            <rect x="30" y="36" width="60" height="36" rx="17" fill="#09265c"/>
+            <path d="M41 52q5-10 10 0m18 0q5-10 10 0m-26 5q7 9 14 0" stroke="#77e9ff" stroke-width="3.3" stroke-linecap="round" fill="none"/>
+            <path d="m103 31 9-9m-5 17 11-3" stroke="#aaeaff" stroke-width="3.5" stroke-linecap="round"/>
+            <circle cx="60" cy="99" r="8" fill="#1677d7"/><path d="M57 99h6m-3-3v6" stroke="white" stroke-width="2" stroke-linecap="round"/>
+        </symbol>
+        <symbol id="icon-megaphone" viewBox="0 0 48 48">
+            <path d="m10 27 5 12a4 4 0 0 0 7-3l-4-9" fill="#b92463"/>
+            <path d="M6 19h11l17-9v23l-17-6H6a4 4 0 0 1 0-8" fill="#f15991"/>
+            <ellipse cx="34" cy="21" rx="4" ry="12" fill="#c52568"/>
+            <path d="m40 14 4-3m-3 10h5m-6 6 4 3" fill="none" stroke="#d43e7c" stroke-width="2.5" stroke-linecap="round"/>
+        </symbol>
+        <symbol id="icon-calendar" viewBox="0 0 48 48">
+            <rect x="7" y="9" width="34" height="34" rx="6" fill="#1983d4"/>
+            <rect x="10" y="15" width="28" height="25" rx="3" fill="#f3fbff"/>
+            <path d="M7 15a6 6 0 0 1 6-6h22a6 6 0 0 1 6 6v6H7Z" fill="#ef543d"/>
+            <path d="M15 6v7m18-7v7" stroke="#952f37" stroke-width="3.5" stroke-linecap="round"/>
+            <path d="M14 25h5v5h-5zm7 0h5v5h-5zm7 0h5v5h-5zm-14 7h5v5h-5zm7 0h5v5h-5zm7 0h5v5h-5z" fill="#67b5ed"/>
+        </symbol>
+        <symbol id="icon-book" viewBox="0 0 48 48">
+            <path d="M38 11H14a7 7 0 0 0 0 14h25m1 0H12a7 7 0 0 0 0 14h28" fill="none" stroke="#0a6ac0" stroke-width="6" stroke-linecap="round"/>
+            <path d="M35 14H15a4 4 0 0 0 0 8h20m2 6H13a4 4 0 0 0 0 8h24" fill="#fff5d5"/>
+            <path d="M39 25H13a7 7 0 0 0 0 14h27" fill="none" stroke="#d8374e" stroke-width="3.5" stroke-linecap="round"/>
+            <path d="M16 18h18m-18 14h20" stroke="#efb555" stroke-width="1.3"/>
+        </symbol>
+        <symbol id="icon-trophy" viewBox="0 0 48 48">
+            <path d="M12 12H6v4a8 8 0 0 0 10 8m20-12h6v4a8 8 0 0 1-10 8" fill="none" stroke="#e88709" stroke-width="3"/>
+            <path d="M12 8h24v10a12 12 0 0 1-9 12v6h6v4H15v-4h6v-6a12 12 0 0 1-9-12Z" fill="#ffaf18"/>
+            <path d="m24 13 2.5 5 5.5.8-4 3.9 1 5.3-5-2.5-5 2.5 1-5.3-4-3.9 5.5-.8Z" fill="#fff6cf"/>
+            <rect x="12" y="39" width="24" height="4" rx="2" fill="#6645a3"/>
+        </symbol>
+        <symbol id="icon-school" viewBox="0 0 48 48">
+            <path d="M7 24h34v18H7Z" fill="#ffc664"/><path d="M5 25l5-7h28l5 7Z" fill="#c9453b"/>
+            <path d="M15 22 24 12l9 10v20H15Z" fill="#ffe18e"/>
+            <path d="M13 23 24 12l11 11m-11-11V5h10l-3 3 3 3h-9" fill="none" stroke="#d34b32" stroke-width="3" stroke-linejoin="round"/>
+            <circle cx="24" cy="24" r="4.5" fill="#fff" stroke="#173762" stroke-width="1.5"/>
+            <path d="M24 21v3h2m-5 18V34a3 3 0 0 1 6 0v8m-16-13v5m26-5v5" stroke="#173762" stroke-width="2" fill="none"/>
+        </symbol>
+        <symbol id="icon-phone" viewBox="0 0 48 48">
+            <path d="M24 5a18 18 0 0 0-15 28l-3 9 9-3A18 18 0 1 0 24 5" fill="#199b55"/>
+            <path d="M17 13c-4 0-6 5-3 10 3 5 7 9 12 11 5 2 9-1 9-4l-6-5-3 3c-4-2-6-5-7-7l3-3Z" fill="#fff"/>
+        </symbol>
+        <symbol id="icon-clipboard" viewBox="0 0 48 48">
+            <rect x="9" y="8" width="30" height="36" rx="6" fill="#0756b6"/>
+            <rect x="12" y="12" width="24" height="28" rx="3" fill="#f8fbff"/>
+            <path d="M18 8h3a3 3 0 0 1 6 0h3v7H18Z" fill="#1583ed"/>
+            <path d="m16 22 2 2 4-4m-6 10 2 2 4-4" fill="none" stroke="#209d53" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M25 22h7m-7 8h7m-7 6h7" stroke="#277ad0" stroke-width="2" stroke-linecap="round"/>
+        </symbol>
+    </svg>
 
-<body>
-
-<div class="app">
-
-    <header class="header">
-        <h1>SKAWAD AI</h1>
-        <p>SK Kampung Jawa 2</p>
+    <header class="home-header">
+        <div class="home-shell home-brand">
+            <img class="home-school-logo" src="school-logo.png" width="3375" height="4219"
+                 alt="Lencana Sekolah Kebangsaan Kampung Jawa 2">
+            <div class="home-brand-copy">
+                <h1>SKAWAD AI</h1>
+                <p class="home-school-name">SK Kampung Jawa 2</p>
+                <p class="home-location"><svg aria-hidden="true"><use href="#icon-location"/></svg>Klang, Selangor</p>
+            </div>
+        </div>
+        <svg class="home-wave home-wave-header" viewBox="0 0 1200 150" preserveAspectRatio="none" aria-hidden="true">
+            <path d="M0 89C137 167 504 147 690 132 970 110 1070 45 1200 0v150H0Z" fill="#8dccfa" opacity=".4"/>
+            <path d="M0 123c192 49 483 27 707 14 242-14 394-69 493-113v126H0Z" fill="#fff"/>
+            <path d="M0 133c204 38 489 21 707 9 241-13 394-69 493-113v71c-157 44-313 50-496 50H0Z" fill="#1687de"/>
+            <path d="M0 127c215 40 493 25 712 17 242-9 388-29 488-67v73H0Z" fill="#eaf5ff" opacity=".72"/>
+        </svg>
     </header>
 
-    <main class="content">
+    <main class="home-shell home-main">
+        <a class="home-chat" href="chat.html">
+            <svg class="home-robot" aria-hidden="true"><use href="#icon-robot"/></svg>
+            <span class="home-card-copy">
+                <strong>Tanya SKAWAD AI</strong>
+                <span>Dapatkan maklumat, soalan dan bantuan berkaitan sekolah.</span>
+            </span>
+            <span class="home-chat-arrow"><svg class="home-chevron" aria-hidden="true"><use href="#icon-chevron"/></svg></span>
+        </a>
 
-        <section class="welcome">
-            <h2>Selamat Datang 👋</h2>
-            <p>
-                Pusat informasi pintar SKAWAD.
-                Dapatkan maklumat sekolah dengan mudah dan pantas.
-            </p>
-        </section>
-
-        <div class="menu">
-
-<button onclick="window.location.href='pengumuman.html'">
-    <span class="icon">📢</span>
-    Pengumuman
-</button>
-
-            <button>
-                <span class="icon">📅</span>
-                Takwim Sekolah
-            </button>
-
-           
-<a href="akademik.html" class="menu-link">
-    <span class="icon">📚</span>
-    Akademik
-</a>
-
-
-            <button>
-                <span class="icon">🏆</span>
-                Kokurikulum
-            </button>
-
-            <button>
-                <span class="icon">🏫</span>
-                Info Sekolah
-            </button>
-
-            <button>
-                <span class="icon">☎️</span>
-                Hubungi
-            </button>
-
-            <a href="kehadiran.html" class="menu-link">
-                <span class="icon">📋</span>
-                KEHADIRAN
+        <nav class="home-menu" aria-label="Menu sekolah">
+            <a class="home-card menu-link" href="pengumuman.html">
+                <span class="home-icon home-icon-pink"><svg aria-hidden="true"><use href="#icon-megaphone"/></svg></span>
+                <span class="home-card-copy"><strong>Pengumuman</strong><span>Berita dan makluman terkini</span></span>
+                <svg class="home-chevron" aria-hidden="true"><use href="#icon-chevron"/></svg>
             </a>
-
-            <button class="ai-button" onclick="window.location.href='chat.html'">
-    <span class="icon">🤖</span>
-    Tanya SKAWAD AI
-</button>
-
-        </div>
-
+            <a class="home-card menu-link" href="takwim.html">
+                <span class="home-icon"><svg aria-hidden="true"><use href="#icon-calendar"/></svg></span>
+                <span class="home-card-copy"><strong>Takwim Sekolah</strong><span>Aktiviti dan acara sekolah</span></span>
+                <svg class="home-chevron" aria-hidden="true"><use href="#icon-chevron"/></svg>
+            </a>
+            <a class="home-card menu-link" href="akademik.html">
+                <span class="home-icon"><svg aria-hidden="true"><use href="#icon-book"/></svg></span>
+                <span class="home-card-copy"><strong>Akademik</strong><span>Pembelajaran dan sumber</span></span>
+                <svg class="home-chevron" aria-hidden="true"><use href="#icon-chevron"/></svg>
+            </a>
+            <a class="home-card menu-link" href="kokurikulum.html">
+                <span class="home-icon home-icon-purple"><svg aria-hidden="true"><use href="#icon-trophy"/></svg></span>
+                <span class="home-card-copy"><strong>Kokurikulum</strong><span>Sukan, kelab dan persatuan</span></span>
+                <svg class="home-chevron" aria-hidden="true"><use href="#icon-chevron"/></svg>
+            </a>
+            <a class="home-card menu-link" href="info-sekolah.html">
+                <span class="home-icon"><svg aria-hidden="true"><use href="#icon-school"/></svg></span>
+                <span class="home-card-copy"><strong>Info Sekolah</strong><span>Profil, visi dan misi sekolah</span></span>
+                <svg class="home-chevron" aria-hidden="true"><use href="#icon-chevron"/></svg>
+            </a>
+            <a class="home-card menu-link" href="hubungi.html">
+                <span class="home-icon home-icon-green"><svg aria-hidden="true"><use href="#icon-phone"/></svg></span>
+                <span class="home-card-copy"><strong>Hubungi</strong><span>Maklumat dan saluran rasmi</span></span>
+                <svg class="home-chevron" aria-hidden="true"><use href="#icon-chevron"/></svg>
+            </a>
+            <a class="home-card home-card-attendance menu-link" href="kehadiran.html">
+                <span class="home-icon"><svg aria-hidden="true"><use href="#icon-clipboard"/></svg></span>
+                <span class="home-card-copy"><strong>Kehadiran</strong><span>Rekod kehadiran murid</span></span>
+                <svg class="home-chevron" aria-hidden="true"><use href="#icon-chevron"/></svg>
+            </a>
+        </nav>
     </main>
 
-    <footer class="footer">
-        SK Kampung Jawa 2
+    <footer class="home-footer">
+        <svg class="home-wave" viewBox="0 0 1200 92" preserveAspectRatio="none" aria-hidden="true">
+            <path d="M0 0c175 57 336 92 519 82 246-13 438-73 681-77v87H0Z" fill="#8ed0ff"/>
+            <path d="M0 42c201 39 366 50 529 43 246-11 423-73 671-26v33H0Z" fill="#0758af"/>
+            <path d="M0 42c202 46 388 55 627 37 212-16 398-35 573 13H0Z" fill="#073b78"/>
+        </svg>
     </footer>
 
-</div>
-
-<script>
-    if ("serviceWorker" in navigator) {
-        window.addEventListener("load", function () {
-            navigator.serviceWorker.register("./sw.js")
-                .then(function () {
-                    console.log("SKAWAD AI Service Worker registered!");
-                })
-                .catch(function (error) {
-                    console.error("Service Worker error:", error);
-                });
-        });
-    }
-</script>
-
+    <script>
+        if ("serviceWorker" in navigator) {
+            window.addEventListener("load", function () {
+                navigator.serviceWorker.register("./sw.js")
+                    .then(function () {
+                        console.log("SKAWAD AI Service Worker registered!");
+                    })
+                    .catch(function (error) {
+                        console.error("Service Worker error:", error);
+                    });
+            });
+        }
+    </script>
 </body>
 </html>

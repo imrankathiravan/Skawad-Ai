@@ -1,11 +1,20 @@
 
-const CACHE_NAME = "skawad-ai-v5";
+const CACHE_NAME = "skawad-ai-v13";
 
 const FILES_TO_CACHE = [
     "./",
     "./index.html",
     "./chat.html",
     "./pengumuman.html",
+    "./takwim.html",
+    "./kokurikulum.html",
+    "./info-sekolah.html",
+    "./hubungi.html",
+    "./tahun1.html",
+    "./tahun3.html",
+    "./tahun4.html",
+    "./tahun5.html",
+    "./tahun6.html",
     "./style.css",
     "./data.js",
     "./knowledge.js",
@@ -17,6 +26,7 @@ const FILES_TO_CACHE = [
     "./attendance.js",
     "./attendance.css",
     "./manifest.json",
+    "./school-logo.png",
     "./icons/icon-192.png",
     "./icons/icon-512.png"
 ];
