@@ -11,6 +11,9 @@
 </head>
 <body class="home">
     <svg class="home-icon-library" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <clipPath id="home-crest-outline" clipPathUnits="objectBoundingBox">
+            <path d="M0.50125 0.20200 L0.51500 0.20500 L0.57000 0.26000 L0.59625 0.28100 L0.62625 0.29900 L0.63875 0.30400 L0.66625 0.31000 L0.69250 0.30900 L0.71750 0.30200 L0.72750 0.30200 L0.74000 0.30700 L0.75125 0.32000 L0.75375 0.34800 L0.75000 0.40200 L0.74750 0.40500 L0.74375 0.44000 L0.74125 0.44300 L0.73125 0.49100 L0.71750 0.53200 L0.71375 0.53600 L0.70250 0.56400 L0.68875 0.58900 L0.67375 0.60900 L0.67500 0.61600 L0.70125 0.62500 L0.71875 0.62800 L0.73750 0.63600 L0.74375 0.64300 L0.74375 0.64700 L0.73625 0.65700 L0.69750 0.67600 L0.66000 0.70300 L0.58125 0.77700 L0.56125 0.78600 L0.53250 0.79500 L0.52250 0.79500 L0.51375 0.79800 L0.49500 0.79800 L0.45875 0.79500 L0.42500 0.78500 L0.40750 0.77700 L0.34875 0.72500 L0.34625 0.72500 L0.31000 0.69600 L0.28250 0.67800 L0.27625 0.67600 L0.27000 0.67000 L0.26500 0.66900 L0.24000 0.65000 L0.23875 0.63900 L0.24375 0.63300 L0.26500 0.62500 L0.27125 0.62500 L0.28625 0.62000 L0.30625 0.61000 L0.30250 0.59700 L0.29125 0.58100 L0.28875 0.57100 L0.27625 0.54700 L0.25750 0.48400 L0.24875 0.42700 L0.24750 0.39200 L0.24500 0.38900 L0.24500 0.31200 L0.25125 0.30400 L0.26250 0.30000 L0.27625 0.30000 L0.30500 0.31000 L0.32000 0.31000 L0.34875 0.30300 L0.36375 0.29700 L0.39000 0.28400 L0.39875 0.27700 L0.41000 0.27200 L0.42125 0.26200 L0.42750 0.26000 L0.45875 0.23500 L0.46500 0.22700 L0.47125 0.22400 L0.48375 0.20900 L0.50125 0.20200 Z"/>
+        </clipPath>
         <symbol id="icon-chevron" viewBox="0 0 24 24">
             <path d="m9 5 7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round"/>
         </symbol>
@@ -75,19 +78,21 @@
 
     <header class="home-header">
         <div class="home-shell home-brand">
-            <img class="home-school-logo" src="school-logo.png" width="3375" height="4219"
-                 alt="Lencana Sekolah Kebangsaan Kampung Jawa 2">
+            <div class="home-crest-frame">
+                <img class="home-school-logo" src="school-logo.png" width="3375" height="4219"
+                     style="clip-path: url(#home-crest-outline)"
+                     alt="Lencana Sekolah Kebangsaan Kampung Jawa 2">
+            </div>
             <div class="home-brand-copy">
-                <h1>SKAWAD AI</h1>
+                <h1>SKAWAD</h1>
                 <p class="home-school-name">SK Kampung Jawa 2</p>
                 <p class="home-location"><svg aria-hidden="true"><use href="#icon-location"/></svg>Klang, Selangor</p>
             </div>
         </div>
-        <svg class="home-wave home-wave-header" viewBox="0 0 1200 150" preserveAspectRatio="none" aria-hidden="true">
-            <path d="M0 89C137 167 504 147 690 132 970 110 1070 45 1200 0v150H0Z" fill="#8dccfa" opacity=".4"/>
-            <path d="M0 123c192 49 483 27 707 14 242-14 394-69 493-113v126H0Z" fill="#fff"/>
-            <path d="M0 133c204 38 489 21 707 9 241-13 394-69 493-113v71c-157 44-313 50-496 50H0Z" fill="#1687de"/>
-            <path d="M0 127c215 40 493 25 712 17 242-9 388-29 488-67v73H0Z" fill="#eaf5ff" opacity=".72"/>
+        <svg class="home-wave announcements-wave" viewBox="0 0 1200 95" preserveAspectRatio="none" aria-hidden="true">
+            <path d="M0 45c200 38 386 48 609 19 229-29 409-79 591-61v92H0Z" fill="#65b9fa" opacity=".5"/>
+            <path d="M0 69c243 36 432 27 632 1 213-28 401-56 568-33v58H0Z" fill="#c5e3ff"/>
+            <path d="M0 81c224 20 429 16 637-6 215-23 388-40 563-22v42H0Z" fill="#e5f2ff"/>
         </svg>
     </header>
 

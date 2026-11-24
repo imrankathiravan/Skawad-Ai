@@ -276,34 +276,6 @@ form textarea {
 
 /* Bahasa Melayu Interactive Exercise */
 
-#latihan {
-    background: #ffffff;
-    padding: 20px;
-    border-radius: 16px;
-    margin-top: 25px;
-    margin-bottom: 25px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-}
-
-#latihan button {
-    display: block;
-    width: 100%;
-    padding: 15px;
-    margin: 10px 0;
-    background: #eaf1fb;
-    color: #073b78;
-    border: 2px solid #d5e3f5;
-    border-radius: 12px;
-    font-size: 16px;
-    font-weight: 600;
-    text-align: left;
-    cursor: pointer;
-}
-
-#latihan button:hover {
-    background: #d5e5fa;
-}
-
 #keputusan {
     font-size: 17px;
     font-weight: bold;
@@ -393,21 +365,36 @@ body {
 .home-header {
     position: relative;
     isolation: isolate;
-    background: linear-gradient(112deg, #fefefe 23%, #f5faff 62%, #d4ebff);
+    background: var(--portal-header);
+    color: #fff;
 }
 
 .home-brand {
     display: flex;
     align-items: center;
     gap: clamp(.55rem, 2vw, 1.5rem);
-    padding-bottom: clamp(1rem, 2.8vw, 2.5rem);
+    padding-top: clamp(1rem, 3vw, 1.75rem);
+    /* Apply the larger clearance once. An already inset viewport can report zero. */
+    padding-top: max(clamp(1rem, 3vw, 1.75rem), env(safe-area-inset-top, 0px));
+    padding-bottom: clamp(2.45rem, 5vw, 4.75rem);
+}
+
+.home-crest-frame {
+    position: relative;
+    flex: none;
+    height: clamp(5rem, 3rem + 9vw, 9rem);
+    aspect-ratio: 412 / 596;
+    overflow: hidden;
 }
 
 .home-school-logo {
+    /* Map the original 800×1000 reference image into the crest bounds (191, 202, 412, 596). */
+    position: absolute;
+    top: calc(-202 / 596 * 100%);
+    left: calc(-191 / 412 * 100%);
     display: block;
-    flex: none;
-    width: clamp(4.9rem, 18vw, 13rem);
-    height: clamp(7rem, 21vw, 16rem);
+    width: calc(800 / 412 * 100%);
+    height: auto;
     object-fit: contain;
 }
 
@@ -422,7 +409,7 @@ body {
     font-size: clamp(1.65rem, 6.8vw, 5rem);
     font-weight: 850;
     letter-spacing: -.05em;
-    line-height: 1.02;
+    line-height: 1.12;
 }
 
 .home-school-name {
@@ -438,7 +425,7 @@ body {
     align-items: center;
     gap: .3em;
     margin-top: .3em;
-    color: #29436a;
+    color: #e5f1ff;
     font-size: clamp(.875rem, 2.5vw, 1.65rem);
     font-weight: 550;
 }
@@ -453,13 +440,6 @@ body {
     display: block;
     width: 100%;
     height: clamp(2.6rem, 7.8vw, 6.6rem);
-}
-
-.home-wave-header {
-    position: absolute;
-    z-index: -1;
-    bottom: 0;
-    height: clamp(2.8rem, 12vw, 9rem);
 }
 
 .home-main {
@@ -664,11 +644,26 @@ body {
     }
 }
 
-/* Pengumuman */
+/* Shared Pengumuman theme for the portal and compact chat. */
+:where(.home-header, .announcements-page, .chat-page) {
+    --portal-header: linear-gradient(120deg, #073b78, #082b61 52%, #0855b3);
+}
+
+:where(.announcements-page, .chat-page) {
+    --portal-navy: #073b78;
+    --portal-surface: linear-gradient(115deg, #fff, #f0f7ff);
+    --portal-shadow: 0 7px 15px #285e9e20, 0 1px 2px #285e9e35;
+    --portal-radius: clamp(1.15rem, 3vw, 2.1rem);
+    --portal-control-radius: .8rem;
+    --portal-control-border: #b7dafc;
+    --portal-control-fill: #eaf3ff;
+    --portal-control-hover: #dcecff;
+}
+
 .announcements-header {
     position: relative;
     isolation: isolate;
-    background: linear-gradient(120deg, #073b78, #082b61 52%, var(--home-blue));
+    background: var(--portal-header);
     color: white;
 }
 
@@ -676,18 +671,22 @@ body {
     padding-block: clamp(1rem, 3vw, 2rem) clamp(3.25rem, 8vw, 7rem);
 }
 
-.announcements-back {
+.announcements-back,
+.portal-button {
     display: inline-flex;
     align-items: center;
     gap: .55rem;
     min-height: 44px;
     padding: .5rem .85rem;
-    border: 1px solid #b7dafc;
-    border-radius: .8rem;
-    background: #ffffff15;
-    color: white;
+    border: 1px solid var(--portal-control-border);
+    border-radius: var(--portal-control-radius);
     font-weight: 650;
     text-decoration: none;
+}
+
+.announcements-back {
+    background: #ffffff15;
+    color: white;
 }
 
 .announcements-back svg {
@@ -748,13 +747,14 @@ body {
     gap: clamp(.85rem, 2vw, 1.4rem);
 }
 
-.announcements-page .announcement {
+.announcements-page .announcement,
+.announcements-page .portal-grid .home-card {
     min-width: 0;
     padding: clamp(1rem, 2.6vw, 1.7rem);
     border: 1px solid white;
-    border-radius: clamp(1.15rem, 3vw, 2.1rem);
-    background: linear-gradient(115deg, #fff, #f0f7ff);
-    box-shadow: 0 7px 15px #285e9e20, 0 1px 2px #285e9e35;
+    border-radius: var(--portal-radius);
+    background: var(--portal-surface);
+    box-shadow: var(--portal-shadow);
     overflow-wrap: anywhere;
 }
 
@@ -856,12 +856,14 @@ blockquote.announcement-copy {
 }
 
 /* Navigation and informational pages */
+.portal-header-mark {
+    background: #fff;
+}
+
 .portal-crest {
-    display: block;
-    flex: none;
-    width: clamp(3rem, 8vw, 5rem);
-    height: auto;
-    border-radius: .7rem;
+    width: 86%;
+    height: 86%;
+    object-fit: contain;
 }
 
 .portal-nav {
@@ -870,18 +872,26 @@ blockquote.announcement-copy {
     gap: .5rem;
 }
 
-.portal-home {
-    color: #073b78;
-    background: #edf5ff;
-    margin-bottom: .75rem;
+.portal-button {
+    background: var(--portal-control-fill);
+    color: var(--portal-navy);
+    font-family: inherit;
+    font-size: 1rem;
+    line-height: 1.4;
+    cursor: pointer;
 }
 
-.portal-home:hover {
-    background: #dbeeff;
+.portal-button:hover:not(:disabled) {
+    background: var(--portal-control-hover);
 }
 
-.portal-home:focus-visible,
-.portal-link:focus-visible {
+.portal-button-primary,
+.portal-button-primary:hover:not(:disabled) {
+    background: var(--portal-header);
+    color: #fff;
+}
+
+.portal-button:focus-visible {
     outline: 3px solid #07519e;
     outline-offset: 3px;
 }
@@ -892,16 +902,20 @@ blockquote.announcement-copy {
 
 .portal-grid .home-card {
     min-height: 5.5rem;
-    padding: 1rem;
 }
 
-.portal-link {
-    display: inline-flex;
-    align-items: center;
-    min-height: 44px;
-    margin-top: .5rem;
-    color: #073b78;
-    font-weight: 650;
+.announcement > .portal-button {
+    margin-top: .85rem;
+}
+
+.lesson-section .portal-button {
+    display: flex;
+    width: 100%;
+    text-align: start;
+}
+
+.lesson-section p + p {
+    margin-top: .65rem;
 }
 
 .portal-section {
@@ -919,4 +933,200 @@ blockquote.announcement-copy {
 
 .portal-details dd + dt {
     margin-top: .4rem;
+}
+
+/* Chat application layout. The transcript is the only scroll container. */
+body.chat-page {
+    overflow: hidden;
+    background: #e5f2ff;
+    color: #142747;
+    font-family: system-ui, "Segoe UI", Arial, sans-serif;
+}
+
+.chat-screen {
+    position: fixed;
+    inset-inline: 0;
+    top: var(--chat-viewport-top, 0px);
+    display: grid;
+    container-type: size;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    width: min(100%, 52rem);
+    height: 100vh;
+    height: var(--chat-viewport-height, 100dvh);
+    margin-inline: auto;
+    background: #f5f9ff;
+    box-shadow: 0 0 2rem #183d701c;
+}
+
+.chat-topbar {
+    display: flex;
+    align-items: center;
+    gap: .7rem;
+    padding: calc(.5rem + env(safe-area-inset-top, 0px))
+        max(.75rem, env(safe-area-inset-right, 0px)) .5rem
+        max(.75rem, env(safe-area-inset-left, 0px));
+    background: var(--portal-header);
+    color: #fff;
+}
+
+.chat-topbar h1 {
+    font-size: 1rem;
+    line-height: 1.25;
+    letter-spacing: .015em;
+}
+
+.chat-topbar p {
+    margin-top: .15rem;
+    color: #dfedff;
+    font-size: .8rem;
+}
+
+.chat-topbar .chat-back {
+    display: grid;
+    flex: none;
+    width: 44px;
+    height: 44px;
+    place-items: center;
+    padding: 0;
+    border-color: var(--portal-control-border);
+}
+
+.chat-back svg, .chat-send svg {
+    width: 1.4rem;
+    height: 1.4rem;
+}
+
+.chat-avatar {
+    display: grid;
+    flex: none;
+    width: 2.5rem;
+    height: 2.5rem;
+    place-items: center;
+    border-radius: .8rem;
+    background: #d9edff2e;
+}
+
+.chat-avatar svg {
+    width: 1.75rem;
+    height: 1.75rem;
+}
+
+.chat-screen .chat-messages {
+    min-height: 0;
+    height: auto;
+    margin: 0;
+    padding: clamp(.75rem, 3vw, 1.5rem);
+    gap: .75rem;
+    border-radius: 0;
+    background: #f5f9ff;
+    overscroll-behavior: contain;
+}
+
+.chat-screen .bot-message, .chat-screen .user-message {
+    flex: none;
+    width: fit-content;
+    max-width: min(88%, 36rem);
+    padding: .7rem .9rem;
+    font-size: .95rem;
+    line-height: 1.6;
+}
+
+.chat-screen .bot-message {
+    border: 1px solid #d6e5f5;
+    border-radius: 1rem 1rem 1rem .3rem;
+    background: var(--portal-surface);
+    box-shadow: 0 2px 6px #123e7410;
+}
+
+.chat-screen .user-message {
+    border-radius: 1rem 1rem .3rem 1rem;
+    background: var(--portal-navy);
+}
+
+.chat-composer {
+    padding: .65rem max(.75rem, env(safe-area-inset-right, 0px))
+        calc(.65rem + env(safe-area-inset-bottom, 0px))
+        max(.75rem, env(safe-area-inset-left, 0px));
+    border-top: 1px solid #dbe7f5;
+    background: #fff;
+}
+
+.chat-composer .suggested-questions {
+    margin-bottom: .6rem;
+}
+
+.chat-composer h2 {
+    margin-bottom: .25rem;
+    color: #3a5577;
+    font-size: .8rem;
+    font-weight: 650;
+}
+
+.chat-suggestions-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .25rem .4rem;
+}
+
+.chat-composer .suggested-questions button {
+    min-height: 32px;
+    margin: 0;
+    padding: .3rem .6rem;
+    border-color: var(--portal-control-border);
+    background: var(--portal-control-fill);
+    color: var(--portal-navy);
+    font-family: inherit;
+    font-size: .75rem;
+    font-weight: 600;
+}
+
+.chat-composer .suggested-questions button:hover {
+    background: var(--portal-control-hover);
+}
+
+.chat-composer .chat-form {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: .5rem;
+    align-items: stretch;
+}
+
+.chat-composer .chat-form input {
+    min-width: 0;
+    min-height: 46px;
+    padding: .6rem .75rem;
+    background: #f5f9ff;
+    color: #142747;
+    font-size: 16px;
+}
+
+.chat-send {
+    display: grid;
+    width: 46px;
+    min-height: 46px;
+    place-items: center;
+    border: 0;
+    border-radius: var(--portal-control-radius);
+    background: var(--portal-header);
+    color: white;
+    cursor: pointer;
+}
+
+.chat-screen :focus-visible {
+    outline: 2px solid #0c62ba;
+    outline-offset: 2px;
+}
+
+.chat-screen .chat-back:focus-visible {
+    outline-color: #fff;
+}
+
+.chat-screen .chat-messages:focus-visible {
+    outline-offset: -3px;
+}
+
+@container (max-height: 15rem) {
+    .chat-composer:has(input:focus) .suggested-questions {
+        display: none;
+    }
 }

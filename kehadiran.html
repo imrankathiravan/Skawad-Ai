@@ -9,22 +9,50 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="attendance.css">
 </head>
-<body>
-<div class="app attendance-app">
-    <header class="header"><h1>📋 KEHADIRAN</h1><p>SKAWAD AI · Demonstrasi</p></header>
-    <main class="content">
-        <a class="announcements-back portal-home" href="index.html">← Kembali ke Utama</a>
-        <aside class="demo-notice" aria-label="Notis demonstrasi">
+<body class="home announcements-page attendance-app">
+    <header class="announcements-header">
+        <div class="home-shell announcements-header-content">
+            <nav class="portal-nav" aria-label="Navigasi halaman">
+                <a class="announcements-back" href="index.html">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="m12 5-7 7 7 7M5 12h14"/>
+                    </svg>
+                    Kembali ke Utama
+                </a>
+            </nav>
+            <div class="announcements-identity">
+                <span class="home-icon" aria-hidden="true">
+                    <svg viewBox="0 0 48 48">
+                        <rect x="9" y="8" width="30" height="36" rx="6" fill="#0756b6"/>
+                        <rect x="12" y="12" width="24" height="28" rx="3" fill="#f8fbff"/>
+                        <path d="M18 8h3a3 3 0 0 1 6 0h3v7H18Z" fill="#1583ed"/>
+                        <path d="m16 22 2 2 4-4m-6 10 2 2 4-4" fill="none" stroke="#209d53" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M25 22h7m-7 8h7m-7 6h7" stroke="#277ad0" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </span>
+                <div><h1>Kehadiran</h1><p>SK Kampung Jawa 2 · Demonstrasi</p></div>
+            </div>
+        </div>
+        <svg class="home-wave announcements-wave" viewBox="0 0 1200 95" preserveAspectRatio="none" aria-hidden="true">
+            <path d="M0 45c200 38 386 48 609 19 229-29 409-79 591-61v92H0Z" fill="#65b9fa" opacity=".5"/>
+            <path d="M0 69c243 36 432 27 632 1 213-28 401-56 568-33v58H0Z" fill="#c5e3ff"/>
+            <path d="M0 81c224 20 429 16 637-6 215-23 388-40 563-22v42H0Z" fill="#e5f2ff"/>
+        </svg>
+    </header>
+    <main class="home-shell announcements-main">
+        <aside class="announcement demo-notice" aria-label="Notis demonstrasi">
             <strong>DEMO MODE — FICTIONAL DATA</strong>
             <p>Semua murid dan kelas adalah rekaan. Jangan masukkan maklumat murid sebenar. Rekod demo disimpan dalam pelayar ini sahaja, bukan dihantar ke sekolah atau dikongsi dengan guru lain.</p>
         </aside>
-        <h2>Rekod Kehadiran Demo</h2>
-        <div class="attendance-filters">
-            <label for="attendanceYear">Tahun<select id="attendanceYear"></select></label>
-            <label for="attendanceClass">Kelas demo<select id="attendanceClass"></select></label>
-            <label for="attendanceDate">Tarikh<input id="attendanceDate" type="date" required></label>
-        </div>
-        <section aria-labelledby="dashboardTitle">
+        <section class="announcement portal-section" aria-labelledby="attendanceFiltersTitle">
+            <h2 id="attendanceFiltersTitle">Rekod Kehadiran Demo</h2>
+            <div class="attendance-filters">
+                <label for="attendanceYear">Tahun<select id="attendanceYear"></select></label>
+                <label for="attendanceClass">Kelas demo<select id="attendanceClass"></select></label>
+                <label for="attendanceDate">Tarikh<input id="attendanceDate" type="date" required></label>
+            </div>
+        </section>
+        <section class="announcement portal-section" aria-labelledby="dashboardTitle">
             <h2 id="dashboardTitle">Ringkasan Kehadiran</h2>
             <div class="attendance-stats">
                 <div><span>Jumlah murid</span><strong id="statTotal">0</strong></div>
@@ -37,19 +65,18 @@
             <div class="attendance-percentage"><label for="attendanceProgress">Kehadiran: <strong id="statPercentage">0%</strong></label><progress id="attendanceProgress" max="100" value="0">0%</progress></div>
             <p class="attendance-help">Peratus = (Hadir + Lewat) ÷ jumlah murid × 100. Bersebab tidak dikira hadir. Ringkasan berubah semasa anda menanda, termasuk perubahan yang belum disimpan.</p>
         </section>
-        <section aria-labelledby="rosterTitle">
+        <section class="announcement portal-section" aria-labelledby="rosterTitle">
             <h2 id="rosterTitle">Senarai Murid Rekaan</h2>
             <p id="attendanceState" role="status" aria-live="polite">Memuatkan rekod demo…</p>
             <form id="attendanceForm">
                 <div id="attendanceRoster" class="attendance-roster"></div>
-                <button id="saveAttendance" class="admin-submit" type="submit" disabled>Simpan Kehadiran Demo</button>
+                <button id="saveAttendance" class="portal-button portal-button-primary attendance-save" type="submit" disabled>Simpan Kehadiran Demo</button>
             </form>
-            <button id="deleteAttendance" class="attendance-delete" type="button" disabled>Padam rekod demo bagi pilihan ini</button>
+            <button id="deleteAttendance" class="portal-button attendance-delete" type="button" disabled>Padam rekod demo bagi pilihan ini</button>
             <p class="attendance-help">Untuk mengedit, pilih tahun, kelas dan tarikh rekod yang sama. Tukar status, kemudian simpan semula. Pemadaman hanya melibatkan rekod demo bagi pilihan tersebut.</p>
         </section>
         <noscript>Aktifkan JavaScript untuk mencuba modul kehadiran demo.</noscript>
     </main>
-</div>
 <script src="attendance.js"></script>
 <script>
 if ('serviceWorker' in navigator) navigator.serviceWorker.register('./sw.js').catch(() => {});

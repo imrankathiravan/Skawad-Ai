@@ -1,5 +1,5 @@
 
-const CACHE_NAME = "skawad-ai-v13";
+const CACHE_NAME = "skawad-ai-v18";
 
 const FILES_TO_CACHE = [
     "./",

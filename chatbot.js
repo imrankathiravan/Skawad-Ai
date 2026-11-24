@@ -91,19 +91,42 @@ if (typeof document !== "undefined" && document.getElementById("chatForm")) {
     const form = document.getElementById("chatForm");
     const input = document.getElementById("userInput");
     const messages = document.getElementById("chatMessages");
+    const suggestions = document.querySelector(".suggested-questions");
+    const viewport = window.visualViewport;
+    const scrollToLatest = () => { messages.scrollTop = messages.scrollHeight; };
+
+    // On mobile, the keyboard can resize or pan the visual viewport only.
+    if (viewport && document.body.classList.contains("chat-page")) {
+        function fitConversation() {
+            const nearBottom = messages.scrollHeight - messages.clientHeight - messages.scrollTop <= 8;
+            document.body.style.setProperty("--chat-viewport-height", viewport.height + "px");
+            document.body.style.setProperty("--chat-viewport-top", viewport.offsetTop + "px");
+            if (nearBottom) scrollToLatest();
+        }
+        viewport.addEventListener("resize", fitConversation);
+        viewport.addEventListener("scroll", fitConversation);
+        window.addEventListener("pageshow", fitConversation);
+        fitConversation();
+    }
+
     function addMessage(message, sender) {
         const bubble = document.createElement("div");
         bubble.className = sender === "user" ? "user-message" : "bot-message";
         bubble.textContent = message;
         messages.appendChild(bubble);
-        messages.scrollTop = messages.scrollHeight;
     }
     form.addEventListener("submit", event => {
         event.preventDefault();
         const question = input.value.trim();
         if (!question) return;
-        addMessage(question, "user"); input.value = "";
+        if (suggestions && !suggestions.hidden) {
+            if (suggestions.contains(document.activeElement)) input.focus({ preventScroll: true });
+            suggestions.hidden = true;
+        }
+        addMessage(question, "user");
+        input.value = "";
         addMessage(assistant.answer(question), "bot");
+        scrollToLatest();
     });
     window.askSuggestion = question => { input.value = question; form.requestSubmit(); };
 }

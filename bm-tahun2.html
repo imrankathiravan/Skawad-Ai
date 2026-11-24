@@ -8,19 +8,30 @@
     <title>Bahasa Melayu Tahun 2 | SKAWAD AI</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
-
-<header>
-    <h1>📖 BAHASA MELAYU</h1>
-    <p>Tahun 2 | SK Kampung Jawa 2</p>
-</header>
-
-<main class="container">
-
-    <nav class="portal-nav" aria-label="Navigasi halaman">
-        <a class="announcements-back portal-home" href="index.html">← Kembali ke Utama</a>
-        <a class="announcements-back portal-home" href="tahun2.html">Tahun 2</a>
-    </nav>
+<body class="home announcements-page portal-page">
+    <header class="announcements-header">
+        <div class="home-shell announcements-header-content">
+            <nav class="portal-nav" aria-label="Navigasi halaman">
+                <a class="announcements-back" href="index.html">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="m12 5-7 7 7 7M5 12h14"/>
+                    </svg>
+                    Kembali ke Utama
+                </a>
+                <a class="announcements-back" href="tahun2.html">Tahun 2</a>
+            </nav>
+            <div class="announcements-identity">
+                <span class="home-icon portal-header-mark"><img class="portal-crest" src="icons/icon-192.png" width="192" height="192" alt="Lencana SK Kampung Jawa 2"></span>
+                <div><h1>Bahasa Melayu</h1><p>Tahun 2 · SK Kampung Jawa 2</p></div>
+            </div>
+        </div>
+        <svg class="home-wave announcements-wave" viewBox="0 0 1200 95" preserveAspectRatio="none" aria-hidden="true">
+            <path d="M0 45c200 38 386 48 609 19 229-29 409-79 591-61v92H0Z" fill="#65b9fa" opacity=".5"/>
+            <path d="M0 69c243 36 432 27 632 1 213-28 401-56 568-33v58H0Z" fill="#c5e3ff"/>
+            <path d="M0 81c224 20 429 16 637-6 215-23 388-40 563-22v42H0Z" fill="#e5f2ff"/>
+        </svg>
+    </header>
+<main class="home-shell announcements-main">
 
     <h2>Selamat Datang!</h2>
     <p>
@@ -28,30 +39,18 @@
         nota dan latihan interaktif.
     </p>
 
-    <div class="academic-grid">
-        <a href="#nota" class="academic-card">
-            <span>📚</span>
-            <h3>Nota Pembelajaran</h3>
-        </a>
+    <div class="announcements-grid portal-grid portal-section">
+        <a href="#nota" class="home-card"><span class="home-card-copy"><strong>Nota Pembelajaran</strong></span></a>
 
-        <a href="#latihan" class="academic-card">
-            <span>✏️</span>
-            <h3>Latihan Interaktif</h3>
-        </a>
+        <a href="#latihan" class="home-card"><span class="home-card-copy"><strong>Latihan Interaktif</strong></span></a>
 
-        <a href="#kerjarumah" class="academic-card">
-            <span>📝</span>
-            <h3>Kerja Rumah</h3>
-        </a>
+        <a href="#kerjarumah" class="home-card"><span class="home-card-copy"><strong>Kerja Rumah</strong></span></a>
 
-        <a href="#kuiz" class="academic-card">
-            <span>🏆</span>
-            <h3>Kuiz Bahasa Melayu</h3>
-        </a>
+        <a href="#kuiz" class="home-card"><span class="home-card-copy"><strong>Kuiz Bahasa Melayu</strong></span></a>
     </div>
 
-    <section id="nota">
-        <h2>📚 Nota: Kata Nama Am</h2>
+    <section id="nota" class="announcement portal-section lesson-section">
+        <h2>Nota: Kata Nama Am</h2>
         <p>
             Kata nama am ialah perkataan yang
             digunakan untuk menamakan orang,
@@ -63,34 +62,34 @@
         </p>
     </section>
 
-    <section id="latihan">
-        <h2>✏️ Latihan Interaktif</h2>
+    <section id="latihan" class="announcement portal-section lesson-section">
+        <h2>Latihan Interaktif</h2>
         <p>Yang manakah kata nama am bagi haiwan?</p>
 
-        <button type="button" onclick="semakJawapan(false)">
+        <button class="portal-button" type="button" onclick="semakJawapan(false)">
             A. Sekolah
         </button>
 
-        <button type="button" onclick="semakJawapan(true)">
+        <button class="portal-button" type="button" onclick="semakJawapan(true)">
             B. Kucing
         </button>
 
-        <button type="button" onclick="semakJawapan(false)">
+        <button class="portal-button" type="button" onclick="semakJawapan(false)">
             C. Meja
         </button>
 
         <p id="keputusan" aria-live="polite"></p>
     </section>
 
-    <section id="kerjarumah">
-        <h2>📝 Kerja Rumah</h2>
+    <section id="kerjarumah" class="announcement portal-section lesson-section">
+        <h2>Kerja Rumah</h2>
         <p>
             Belum ada tugasan yang diterbitkan.
         </p>
     </section>
 
-    <section id="kuiz">
-        <h2>🏆 Kuiz Bahasa Melayu</h2>
+    <section id="kuiz" class="announcement portal-section lesson-section">
+        <h2>Kuiz Bahasa Melayu</h2>
         <p>
             Lebih banyak soalan kuiz akan
             ditambah tidak lama lagi.

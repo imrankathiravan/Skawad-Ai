@@ -1,28 +1,145 @@
-/* Attendance-only styles keep the existing pages unchanged. */
-.attendance-app { max-width: 800px; }
-.attendance-app h2 { font-size: 20px; margin: 22px 0 12px; }
-.demo-notice { margin-top: 22px; padding: 16px; background: #eaf1fb; border: 2px solid #073b78; border-radius: 14px; line-height: 1.6; }
-.demo-notice strong { color: #073b78; }
-.attendance-filters { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
-.attendance-filters label { font-weight: bold; min-width: 0; }
-.attendance-filters select, .attendance-filters input, .attendance-roster select { display: block; width: 100%; min-width: 0; min-height: 46px; margin-top: 8px; padding: 10px; border: 1px solid #98a2b3; border-radius: 10px; background: white; color: #172033; font: inherit; }
-.attendance-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
-.attendance-stats > div { background: #f3f6fb; border-radius: 12px; border-top: 4px solid #073b78; padding: 14px 10px; }
-.attendance-stats span { display: block; font-size: 14px; }
-.attendance-stats strong { display: block; font-size: 28px; margin-top: 5px; }
-.attendance-stats .stat-present { border-color: #187342; }
-.attendance-stats .stat-absent { border-color: #b42318; }
-.attendance-stats .stat-late { border-color: #996300; }
-.attendance-stats .stat-excused { border-color: #6941a5; }
-.attendance-percentage { margin-top: 18px; }
-.attendance-percentage progress { display: block; width: 100%; height: 20px; margin-top: 8px; accent-color: #073b78; }
-.attendance-help { font-size: 13px; color: #475467; line-height: 1.6; margin: 12px 0; }
-#attendanceState { margin: 12px 0; padding: 12px; background: #f3f6fb; border-radius: 10px; line-height: 1.5; }
-.attendance-roster { display: grid; gap: 10px; }
-.attendance-pupil { display: grid; grid-template-columns: minmax(0, 1fr) minmax(150px, 1fr); align-items: center; gap: 12px; padding: 12px; border: 1px solid #d0d5dd; border-radius: 12px; }
-.attendance-pupil label { overflow-wrap: anywhere; }
-.attendance-pupil select { margin: 0; }
-.attendance-delete { width: 100%; min-height: 44px; margin-top: 12px; padding: 10px; border: 1px solid #073b78; background: white; color: #073b78; border-radius: 12px; cursor: pointer; }
-.attendance-app button:disabled { opacity: .55; cursor: not-allowed; }
-.attendance-app :focus-visible { outline: 3px solid #1265b3; outline-offset: 3px; }
-@media (max-width: 540px) { .attendance-filters { grid-template-columns: 1fr; } .attendance-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } .attendance-pupil { grid-template-columns: 1fr; } }
+﻿/* Attendance layout uses the shared portal header, surfaces and controls. */
+.attendance-app .demo-notice {
+    border-color: var(--portal-control-border);
+    line-height: 1.6;
+}
+
+.demo-notice strong {
+    color: var(--portal-navy);
+}
+
+.demo-notice p {
+    margin-top: .35rem;
+    color: var(--home-muted);
+}
+
+.attendance-filters,
+.attendance-stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(.65rem, 2vw, 1rem);
+}
+
+.attendance-filters label {
+    min-width: 0;
+    font-weight: 650;
+}
+
+.attendance-filters select,
+.attendance-filters input,
+.attendance-roster select {
+    display: block;
+    width: 100%;
+    min-width: 0;
+    min-height: 46px;
+    margin-top: .4rem;
+    padding: .6rem .7rem;
+    border: 1px solid var(--portal-control-border);
+    border-radius: var(--portal-control-radius);
+    background: #fff;
+    color: var(--home-ink);
+    font: inherit;
+    font-size: 16px;
+}
+
+.attendance-stats > div {
+    padding: clamp(.7rem, 2vw, 1.1rem);
+    border: 1px solid var(--portal-control-border);
+    border-inline-start: 4px solid var(--portal-navy);
+    border-radius: var(--portal-control-radius);
+    background: #fff;
+}
+
+.attendance-stats span {
+    display: block;
+    font-size: .875rem;
+    overflow-wrap: anywhere;
+}
+
+.attendance-stats strong {
+    display: block;
+    margin-top: .2rem;
+    font-size: 1.65rem;
+}
+
+.attendance-stats .stat-present { border-inline-start-color: #187342; }
+.attendance-stats .stat-absent { border-inline-start-color: #b42318; }
+.attendance-stats .stat-late { border-inline-start-color: #996300; }
+.attendance-stats .stat-excused { border-inline-start-color: #6941a5; }
+
+.attendance-percentage {
+    margin-top: 1rem;
+}
+
+.attendance-percentage progress {
+    display: block;
+    width: 100%;
+    height: 1rem;
+    margin-top: .5rem;
+    accent-color: var(--portal-navy);
+}
+
+.attendance-help {
+    margin-top: .75rem;
+    color: var(--home-muted);
+    font-size: .875rem;
+    line-height: 1.6;
+}
+
+#attendanceState {
+    margin-bottom: .75rem;
+    padding: .75rem;
+    border-radius: var(--portal-control-radius);
+    background: var(--portal-control-fill);
+}
+
+.attendance-roster {
+    display: grid;
+    gap: .65rem;
+}
+
+.attendance-pupil {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(150px, 1fr);
+    align-items: center;
+    gap: .65rem;
+    padding: .75rem;
+    border: 1px solid var(--portal-control-border);
+    border-radius: var(--portal-control-radius);
+    background: #fff;
+}
+
+.attendance-pupil label {
+    overflow-wrap: anywhere;
+}
+
+.attendance-pupil select {
+    margin: 0;
+}
+
+.attendance-app :is(.attendance-save, .attendance-delete) {
+    width: 100%;
+    justify-content: center;
+    margin-top: .75rem;
+}
+
+.attendance-app button:disabled {
+    opacity: .6;
+    cursor: not-allowed;
+}
+
+.attendance-app main :focus-visible {
+    outline: 3px solid #1265b3;
+    outline-offset: 3px;
+}
+
+@media (max-width: 540px) {
+    .attendance-filters,
+    .attendance-pupil {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .attendance-stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
