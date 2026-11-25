@@ -31,9 +31,27 @@
     </header>
     <main class="home-shell announcements-main">
         <div class="announcements-grid">
-        <article class="announcement"><h2>Takwim rasmi belum tersedia</h2><p>Senarai tarikh dan acara yang disahkan belum diterbitkan di portal ini.</p></article>
-        <article class="announcement"><h2>Arkib pengumuman</h2><p>Semak tarikh yang pernah diumumkan. Arkib ini tidak mengesahkan acara akan datang atau pelaksanaannya.</p><a class="portal-button" href="pengumuman.html">Lihat Pengumuman</a></article>
+        <article class="announcement">
+            <h2>Tarikh acara sekolah</h2>
+            <p id="calendar-empty">Maklumat ini belum tersedia dalam sistem SKAWAD AI.</p>
+            <dl class="portal-details" id="calendar-events"></dl>
+        </article>
+        <article class="announcement"><h2>Pengumuman sekolah</h2><p>Semak pengumuman asal dan arkib untuk maklumat lanjut.</p><a class="portal-button" href="pengumuman.html">Lihat Pengumuman</a></article>
         </div>
     </main>
+    <script src="data.js"></script>
+    <script src="knowledge.js"></script>
+    <script>
+        const events = schoolAnnouncementGroups(schoolKnowledge.calendar.events);
+        const list = document.getElementById("calendar-events");
+        for (const event of events) {
+            const title = document.createElement("dt");
+            const dates = document.createElement("dd");
+            title.textContent = event.title;
+            dates.textContent = event.date;
+            list.append(title, dates);
+        }
+        document.getElementById("calendar-empty").hidden = events.length > 0;
+    </script>
 </body>
 </html>

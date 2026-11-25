@@ -31,9 +31,15 @@
     </header>
     <main class="home-shell announcements-main">
         <div class="announcements-grid">
-        <article class="announcement"><h2>Identiti sekolah</h2><dl class="portal-details"><dt>Sekolah</dt><dd>SK Kampung Jawa 2</dd><dt>Nama ringkas</dt><dd>SKAWAD</dd><dt>Lokasi</dt><dd>Klang, Selangor</dd></dl></article>
+        <article class="announcement"><h2>Identiti sekolah</h2><dl class="portal-details"><dt>Sekolah</dt><dd id="school-name">SK Kampung Jawa 2</dd><dt>Nama ringkas</dt><dd id="school-short-name">SKAWAD</dd><dt>Lokasi</dt><dd id="school-location">Klang, Selangor</dd></dl></article>
         <article class="announcement"><h2>Visi dan misi</h2><p>Pernyataan rasmi visi dan misi belum tersedia di portal ini.</p></article>
         </div>
     </main>
+    <script src="data.js"></script>
+    <script>
+        document.getElementById("school-name").textContent = schoolData.schoolName;
+        document.getElementById("school-short-name").textContent = schoolData.shortName;
+        document.getElementById("school-location").textContent = schoolData.location;
+    </script>
 </body>
 </html>

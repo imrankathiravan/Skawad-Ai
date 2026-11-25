@@ -2,6 +2,7 @@ const schoolData = {
 
     schoolName: "SK Kampung Jawa 2",
     shortName: "SKAWAD",
+    location: "Klang, Selangor",
 
     announcements: [
 

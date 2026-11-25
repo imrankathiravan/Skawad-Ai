@@ -27,7 +27,15 @@ function schoolAnnouncementGroups(items) {
 }
 
 const schoolKnowledge = {
-    school: { source: "index.html", name: schoolData.schoolName, shortName: schoolData.shortName },
+    sources: {
+        "pengumuman.html": "Pengumuman SKAWAD",
+        "takwim.html": "Takwim Sekolah SKAWAD",
+        "kokurikulum.html": "Kokurikulum SKAWAD",
+        "info-sekolah.html": "Info Sekolah SKAWAD",
+        "akademik.html": "Akademik SKAWAD",
+        "bm-tahun2.html": "Bahasa Melayu Tahun 2"
+    },
+    school: { source: "info-sekolah.html", name: schoolData.schoolName, shortName: schoolData.shortName, location: schoolData.location },
     academic: {
         source: "akademik.html",
         years: [1, 2, 3, 4, 5, 6].map(year => ({ year, level: year <= 3 ? 1 : 2,
@@ -37,8 +45,8 @@ const schoolKnowledge = {
             examples: "guru, kucing, sekolah, buku", homework: null },
         subjects: ["Bahasa Melayu", "English", "Bahasa Tamil", "Pendidikan Muzik", "Matematik", "Sains", "Pendidikan Islam", "Pendidikan Moral", "Pendidikan Seni Visual", "Pendidikan Jasmani"]
     },
-    cocurricular: { source: "data.js", announcements: schoolData.announcements.filter(item => /perkhemahan/i.test(item.title)) },
+    cocurricular: { source: "kokurikulum.html", announcements: schoolData.announcements.filter(item => /perkhemahan/i.test(item.title)) },
     pdpr: { source: null, details: null },
-    calendar: { source: "data.js", fullCalendar: null },
-    announcements: { source: "data.js", items: schoolData.announcements }
+    calendar: { source: "takwim.html", events: schoolData.announcements.filter(item => item.eventId && schoolDateRange(item.date)) },
+    announcements: { source: "pengumuman.html", items: schoolData.announcements }
 };
